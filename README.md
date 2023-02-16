@@ -1,5 +1,16 @@
 # Sole&Ankle, Revisited — Module 5 workshop
 
+## Todo
+
+* [x] Ex1
+* [x] Ex2
+* [x] Ex3
+* [ ] Ex4
+* [ ] Ex5
+* [ ] Ex6
+* 
+## Introduction
+
 In the Flexbox module, we built an e-commerce store:
 
 ![A screenshot of the original Flexbox module workshop](./docs/original-desktop.png)

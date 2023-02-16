@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { WEIGHTS } from '../../constants';
+import { QUERIES, WEIGHTS } from '../../constants';
 
 import Breadcrumbs from '../Breadcrumbs';
 import Select from '../Select';
@@ -15,14 +15,16 @@ const ShoeIndex = ({ sortId, setSortId }) => {
       <MainColumn>
         <Header>
           <Title>Running</Title>
-          <Select
-            label="Sort"
-            value={sortId}
-            onChange={(ev) => setSortId(ev.target.value)}
-          >
-            <option value="newest">Newest Releases</option>
-            <option value="price">Price</option>
-          </Select>
+          <HiddenOnPhone>
+            <Select
+              label="Sort"
+              value={sortId}
+              onChange={(ev) => setSortId(ev.target.value)}
+            >
+              <option value="newest">Newest Releases</option>
+              <option value="price">Price</option>
+            </Select>
+          </HiddenOnPhone>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
@@ -33,8 +35,10 @@ const ShoeIndex = ({ sortId, setSortId }) => {
           <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
           <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
         </Breadcrumbs>
-        <Spacer size={42} />
-        <ShoeSidebar />
+        <HiddenOnTablet>
+          <Spacer size={42} />
+          <ShoeSidebar />
+        </HiddenOnTablet>
       </LeftColumn>
     </Wrapper>
   );
@@ -45,10 +49,19 @@ const Wrapper = styled.div`
   flex-direction: row-reverse;
   align-items: baseline;
   gap: 32px;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex-direction: column-reverse;
+    gap: 0;
+  }
 `;
 
 const LeftColumn = styled.div`
   flex-basis: 248px;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex-basis: 0;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -64,6 +77,18 @@ const Header = styled.header`
 const Title = styled.h2`
   font-size: 1.5rem;
   font-weight: ${WEIGHTS.medium};
+`;
+
+export const HiddenOnTablet = styled.div`
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
+`;
+
+export const HiddenOnPhone = styled.div`
+  @media ${QUERIES.phoneAndDown} {
+    display: none;
+  }
 `;
 
 export default ShoeIndex;

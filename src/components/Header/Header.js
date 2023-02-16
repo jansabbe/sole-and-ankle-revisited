@@ -55,16 +55,12 @@ const Header = () => {
 const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
-  padding: 18px 32px;
+  padding: 18px var(--app-inline-padding);
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
 
   @media ${QUERIES.tabletAndDown} {
     align-items: center;
-  }
-
-  @media ${QUERIES.phoneAndDown} {
-    padding-inline: 16px;
   }
 `;
 

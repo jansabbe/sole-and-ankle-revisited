@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components/macro';
+import {QUERIES} from "../../constants";
 
 const GlobalStyles = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/
@@ -71,6 +72,11 @@ html {
     Silence the warning about missing Reach Dialog styles
   */
   --reach-dialog: 1;
+  
+  --app-inline-padding: 32px;
+  @media ${QUERIES.phoneAndDown} {
+    --app-inline-padding: 16px;
+  }
 }
 
 html, body, #root {
