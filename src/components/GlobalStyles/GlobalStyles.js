@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components/macro';
-import {QUERIES} from "../../constants";
+import { QUERIES } from '../../constants';
 
 const GlobalStyles = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/
