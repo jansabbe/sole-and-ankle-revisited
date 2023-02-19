@@ -5,29 +5,27 @@ import {
   useContext,
   useMemo,
   useRef,
-} from "react";
+} from 'react';
 import {
-  FocusScope,
   Overlay as Portal,
   useModalOverlay,
   useOverlayPosition,
   useOverlayTrigger,
-  usePopover,
-} from "react-aria";
-import { useOverlayTriggerState } from "react-stately";
+} from 'react-aria';
+import { useOverlayTriggerState } from 'react-stately';
 
 const ModalContext = createContext(null);
 
 export const useModalContext = () => {
   const result = useContext(ModalContext);
   if (!result) {
-    throw new Error("useModalContext within <Modal>");
+    throw new Error('useModalContext within <Modal>');
   }
   return result;
 };
 
 export const Modal = (props) => {
-  const { type = "dialog", children } = props;
+  const { type = 'dialog', children } = props;
   const triggerRef = useRef();
   const state = useOverlayTriggerState({});
   const { triggerProps, overlayProps: contentProps } = useOverlayTrigger(
@@ -56,7 +54,7 @@ const OverlayContext = createContext(null);
 export const useOverlayContext = () => {
   const result = useContext(OverlayContext);
   if (!result) {
-    throw new Error("useOverlayContext within <Underlay>");
+    throw new Error('useOverlayContext within <Underlay>');
   }
   return result;
 };
@@ -75,7 +73,7 @@ export const Underlay = ({ className, isDismissable = true, children }) => {
       <div
         className={className}
         {...underlayProps}
-        style={{ position: "fixed", inset: 0 }}
+        style={{ position: 'fixed', inset: 0 }}
       >
         <OverlayContext.Provider value={{ overlayProps, overlayRef }}>
           {children}
@@ -103,10 +101,11 @@ export const OverlayCloseToTrigger = ({ children, ...props }) => {
   const { overlayProps: positionProps } = useOverlayPosition({
     targetRef: triggerRef,
     overlayRef: overlayRef,
-    placement: "bottom",
-    offset: 8,
+    placement: 'bottom',
+    offset: 16,
     isOpen: state.isOpen,
-    containerPadding: 12,
+    containerPadding: 16,
+    onClose: state.close,
   });
   return (
     <Overlay {...positionProps} {...props}>
@@ -121,6 +120,7 @@ export const ModalTrigger = ({ children }) => {
     triggerProps: { onPress, ...rest },
     triggerRef,
   } = useModalContext();
+
   return cloneElement(element, {
     onClick: onPress,
     ref: triggerRef,

@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-import styled from "styled-components/macro";
-import { DialogOverlay, DialogContent } from "@reach/dialog";
+import React from 'react';
+import styled from 'styled-components/macro';
+import { DialogOverlay, DialogContent } from '@reach/dialog';
 
-import { COLORS, QUERIES, WEIGHTS } from "../../constants";
+import { WEIGHTS } from '../../constants';
 
-import UnstyledButton from "../UnstyledButton";
-import Icon from "../Icon";
-import VisuallyHidden from "../VisuallyHidden";
-import { CloseModal } from "../Modal";
+import UnstyledButton from '../UnstyledButton';
+import Icon from '../Icon';
+import VisuallyHidden from '../VisuallyHidden';
+import { CloseModal } from '../Modal';
 
 const MobileMenuWrapper = styled.div`
   display: flex;
@@ -24,11 +24,11 @@ const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
-  color: ${COLORS.gray[900]};
+  color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
 
   &:first-of-type {
-    color: ${COLORS.secondary};
+    color: var(--color-secondary);
   }
 `;
 
@@ -46,7 +46,7 @@ const Footer = styled.footer`
 
 const FooterLink = styled.a`
   font-size: 0.875rem;
-  color: ${COLORS.gray[700]};
+  color: var(--color-gray-700);
   font-weight: ${WEIGHTS.normal};
   text-decoration: none;
 `;
@@ -55,7 +55,7 @@ const MobileMenu = () => {
   return (
     <MobileMenuWrapper>
       <CloseModal>
-        <UnstyledButton style={{ alignSelf: "end" }}>
+        <UnstyledButton style={{ alignSelf: 'end' }} autoFocus>
           <Icon id="close" strokeWidth={2} />
         </UnstyledButton>
       </CloseModal>

@@ -1,18 +1,17 @@
-import styled from "styled-components/macro";
-import { COLORS } from "../../constants";
+import styled from 'styled-components/macro';
 import {
   Overlay,
   OverlayCloseToTrigger,
   Underlay,
   useModalContext,
   CloseModal,
-} from "./Modal";
-import { Dialog } from "../Dialog";
+} from './Modal';
+import { Dialog } from '../Dialog';
 
-export { Modal, ModalTrigger, CloseModal } from "./Modal";
+export { Modal, ModalTrigger, CloseModal } from './Modal';
 
 const DarkBackground = styled(Underlay)`
-  background-color: rgba(96, 100, 108, 0.8);
+  background-color: var(--modal-background);
 `;
 
 const SidePanel = styled(Dialog)`
@@ -21,15 +20,15 @@ const SidePanel = styled(Dialog)`
   right: 0;
   bottom: 0;
   width: 300px;
-  background-color: ${COLORS.white};
+  background-color: var(--color-white);
 `;
 
 const BorderedPopover = styled(OverlayCloseToTrigger)`
   width: min(300px, 100% - 24px);
-  background-color: ${COLORS.white};
+  background-color: var(--color-white);
   outline: none;
-  padding: 12px;
-  border: 1px solid ${COLORS.primary};
+  padding: 16px;
+  border: 2px solid var(--color-gray-900);
 `;
 
 export const SidePanelModal = ({ title, children }) => {
@@ -43,11 +42,11 @@ export const SidePanelModal = ({ title, children }) => {
   ) : null;
 };
 
-export const Popover = ({ children }) => {
+export const Popover = ({ className, children }) => {
   const { state } = useModalContext();
   return state.isOpen ? (
     <Underlay>
-      <BorderedPopover>{children}</BorderedPopover>
+      <BorderedPopover className={className}>{children}</BorderedPopover>
     </Underlay>
   ) : null;
 };

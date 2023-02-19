@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components/macro";
-import { COLORS, QUERIES, WEIGHTS } from "../../constants";
-import Logo from "../Logo";
-import SuperHeader from "../SuperHeader";
-import MobileMenu from "../MobileMenu";
-import UnstyledButton from "../UnstyledButton";
-import Icon from "../Icon";
-import { Modal, ModalTrigger, SidePanelModal, Popover } from "../Modal";
-import { ShoppingBagButton } from "../ShoppingBag";
+import React from 'react';
+import styled from 'styled-components/macro';
+import { QUERIES, WEIGHTS } from '../../constants';
+import Logo from '../Logo';
+import SuperHeader from '../SuperHeader';
+import MobileMenu from '../MobileMenu';
+import UnstyledButton from '../UnstyledButton';
+import Icon from '../Icon';
+import { Modal, ModalTrigger, SidePanelModal, Popover } from '../Modal';
+import { ShoppingBagButton } from '../ShoppingBag';
 
 const Header = () => {
   // For our mobile hamburger menu, we'll want to use a button
@@ -56,8 +56,8 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px var(--app-inline-padding);
-  height: 72px;
-  border-bottom: 1px solid ${COLORS.gray[300]};
+  border-bottom: 1px solid var(--color-gray-300);
+  overflow: auto;
 
   @media ${QUERIES.tabletAndDown} {
     align-items: center;
@@ -66,8 +66,8 @@ const MainHeader = styled.div`
 
 const Nav = styled.nav`
   display: flex;
-  gap: 48px;
-  margin: 0px 48px;
+  gap: clamp(1.5rem, 12vw - 6rem, 6rem);
+  margin: 0 48px;
 
   @media ${QUERIES.tabletAndDown} {
     display: none;
@@ -82,11 +82,11 @@ const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
-  color: ${COLORS.gray[900]};
+  color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
 
   &:first-of-type {
-    color: ${COLORS.secondary};
+    color: var(--color-secondary);
   }
 `;
 
