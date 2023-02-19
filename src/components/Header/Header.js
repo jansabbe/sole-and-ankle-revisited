@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components/macro';
-import { QUERIES, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
-import UnstyledButton from '../UnstyledButton';
-import Icon from '../Icon';
-import { Modal, ModalTrigger, SidePanelModal, Popover } from '../Modal';
-import { ShoppingBagButton } from '../ShoppingBag';
+import React from "react";
+import styled from "styled-components/macro";
+import { QUERIES, WEIGHTS } from "../../constants";
+import Logo from "../Logo";
+import SuperHeader from "../SuperHeader";
+import MobileMenu from "../MobileMenu";
+import UnstyledButton from "../UnstyledButton";
+import Icon from "../Icon";
+import { Modal, ModalTrigger, SidePanelModal } from "../Modal";
+import { ShoppingBagButton } from "../ShoppingBag";
 
 const Header = () => {
   // For our mobile hamburger menu, we'll want to use a button
@@ -19,19 +19,18 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <Side>
+        <LogoWrapper>
           <Logo />
-        </Side>
-        <Nav>
+        </LogoWrapper>
+        <DesktopNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </Nav>
-        <Side />
-        <MobileIcons>
+        </DesktopNav>
+        <MobileNav>
           <ShoppingBagButton />
           <UnstyledButton>
             <Icon id="search" strokeWidth={2} />
@@ -46,7 +45,8 @@ const Header = () => {
               <MobileMenu />
             </SidePanelModal>
           </Modal>
-        </MobileIcons>
+        </MobileNav>
+        <Filler />
       </MainHeader>
     </header>
   );
@@ -61,10 +61,11 @@ const MainHeader = styled.div`
 
   @media ${QUERIES.tabletAndDown} {
     align-items: center;
+    border-top: 4px solid var(--color-gray-900);
   }
 `;
 
-const Nav = styled.nav`
+const DesktopNav = styled.nav`
   display: flex;
   gap: clamp(1.5rem, 12vw - 6rem, 6rem);
   margin: 0 48px;
@@ -74,8 +75,20 @@ const Nav = styled.nav`
   }
 `;
 
-const Side = styled.div`
+const LogoWrapper = styled.div`
   flex: 1;
+  @media ${QUERIES.tabletAndDown} {
+    flex: revert;
+    margin-right: auto;
+  }
+`;
+
+const Filler = styled.div`
+  flex: 1;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
 `;
 
 const NavLink = styled.a`
@@ -90,12 +103,12 @@ const NavLink = styled.a`
   }
 `;
 
-const MobileIcons = styled.div`
+const MobileNav = styled.div`
   display: none;
 
   @media ${QUERIES.tabletAndDown} {
     display: flex;
-    gap: clamp(20px, 4vw, 40px);
+    gap: clamp(16px, 4vw, 40px);
   }
 `;
 
