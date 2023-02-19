@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components/macro';
-import { COLORS, QUERIES, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
-import UnstyledButton from '../UnstyledButton';
-import Icon from '../Icon';
+import React from "react";
+import styled from "styled-components/macro";
+import { COLORS, QUERIES, WEIGHTS } from "../../constants";
+import Logo from "../Logo";
+import SuperHeader from "../SuperHeader";
+import MobileMenu from "../MobileMenu";
+import UnstyledButton from "../UnstyledButton";
+import Icon from "../Icon";
+import { Modal, ModalTrigger, SidePanelModal, Popover } from "../Modal";
+import { ShoppingBagButton } from "../ShoppingBag";
 
 const Header = () => {
-  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
-
   // For our mobile hamburger menu, we'll want to use a button
   // with an onClick handler, something like this:
   //
@@ -32,22 +32,22 @@ const Header = () => {
         </Nav>
         <Side />
         <MobileIcons>
-          <UnstyledButton>
-            <Icon id="shopping-bag" strokeWidth={2} />
-          </UnstyledButton>
+          <ShoppingBagButton />
           <UnstyledButton>
             <Icon id="search" strokeWidth={2} />
           </UnstyledButton>
-          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
-            <Icon id="menu" strokeWidth={2} />
-          </UnstyledButton>
+          <Modal>
+            <ModalTrigger>
+              <UnstyledButton>
+                <Icon id="menu" strokeWidth={2} />
+              </UnstyledButton>
+            </ModalTrigger>
+            <SidePanelModal title="Menu">
+              <MobileMenu />
+            </SidePanelModal>
+          </Modal>
         </MobileIcons>
       </MainHeader>
-
-      <MobileMenu
-        isOpen={showMobileMenu}
-        onDismiss={() => setShowMobileMenu(false)}
-      />
     </header>
   );
 };

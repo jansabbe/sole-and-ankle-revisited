@@ -1,63 +1,53 @@
-import { createContext, useContext, useMemo, useRef } from 'react';
-import { useOverlayTriggerState } from 'react-stately';
-import { Overlay, useModalOverlay, useOverlayTrigger } from 'react-aria';
-import styled from 'styled-components/macro';
-import { COLORS } from '../../constants';
+import styled from "styled-components/macro";
+import { COLORS } from "../../constants";
+import {
+  Overlay,
+  OverlayCloseToTrigger,
+  Underlay,
+  useModalContext,
+  CloseModal,
+} from "./Modal";
+import { Dialog } from "../Dialog";
 
-const ModalContext = createContext(null);
+export { Modal, ModalTrigger, CloseModal } from "./Modal";
 
-```
-<Modal>
-<ModalTrigger></ModalTrigger>
-<ModalContentsBase>blabla</ModalContentsBase>
-</Modal>
+const DarkBackground = styled(Underlay)`
+  background-color: rgba(96, 100, 108, 0.8);
+`;
 
-```;
+const SidePanel = styled(Dialog)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  background-color: ${COLORS.white};
+`;
 
-export const Modal = ({ children }) => {
-  const state = useOverlayTriggerState({});
-  const ref = useRef();
-  const { triggerProps, overlayProps } = useOverlayTrigger(
-    { type: 'dialog' },
-    state
-  );
-  const { modalProps, underlayProps } = useModalOverlay({}, state, ref);
-  const value = useMemo(
-    () => ({
-      state,
-      triggerProps,
-      overlayProps,
-      modalProps,
-      underlayProps,
-      ref,
-    }),
-    [modalProps, overlayProps, state, triggerProps, underlayProps]
-  );
+const BorderedPopover = styled(OverlayCloseToTrigger)`
+  width: min(300px, 100% - 24px);
+  background-color: ${COLORS.white};
+  outline: none;
+  padding: 12px;
+  border: 1px solid ${COLORS.primary};
+`;
 
-  return (
-    <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
-  );
-};
-
-const useModalContext = () => {
-  const result = useContext(ModalContext);
-  if (result === null) {
-    throw new Error('Should be used within <Modal>');
-  }
-  return result;
-};
-
-export const ModalContentsBase = ({ children }) => {
-  const { state, underlayProps } = useModalContext();
-  return state.open ? (
-    <Overlay>
-      <DarkBackground {...underlayProps}>{children}</DarkBackground>
-    </Overlay>
+export const SidePanelModal = ({ title, children }) => {
+  const { state } = useModalContext();
+  return state.isOpen ? (
+    <DarkBackground>
+      <Overlay>
+        <SidePanel aria-label={title}>{children}</SidePanel>
+      </Overlay>
+    </DarkBackground>
   ) : null;
 };
 
-const DarkBackground = styled.div`
-  position: fixed;
-  inset: 0;
-  background-color: rgba(96, 100, 108 / 0.8);
-`;
+export const Popover = ({ children }) => {
+  const { state } = useModalContext();
+  return state.isOpen ? (
+    <Underlay>
+      <BorderedPopover>{children}</BorderedPopover>
+    </Underlay>
+  ) : null;
+};
